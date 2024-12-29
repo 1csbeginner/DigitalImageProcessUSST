@@ -3,7 +3,7 @@
 <procedure name="main">
 <interface/>
 <body>
-<l>list_files ('D:/courses/图像处理/2024实验要求/图片/cell', 'files', Files)</l>
+<l>list_files ('../图片/cell', 'files', Files)</l>
 <l>for index := 1 to |Files| by 1</l>
 <l>    stop()</l>
 <l>endfor</l>
