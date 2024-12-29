@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'D:/courses/图像处理/2024实验要求/图片/experiment1/7.jpg')</l>
+<l>dev_display (Image)</l>
+<c></c>
+<c>* 分离彩色图像的 R、G、B 通道</c>
+<l>decompose3(Image, ImageRed, ImageGreen, ImageBlue)</l>
+<c></c>
+<c>* 转换为灰度图像</c>
+<l>rgb3_to_gray(ImageRed, ImageGreen, ImageBlue, ImageGray)</l>
+<l>dev_display (ImageGray)</l>
+<c></c>
+<c>* 进行二值化</c>
+<l>threshold(ImageGray, BinaryImage, 128, 255)</l>
+<c></c>
+<l>dev_display (BinaryImage)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

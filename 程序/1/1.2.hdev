@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image(Image1, 'D:/courses/图像处理/2024实验要求/图片/experiment1/1.jpg')</l>
+<l>read_image(Image2, 'D:/courses/图像处理/2024实验要求/图片/experiment1/2.jpg')</l>
+<c></c>
+<l>get_image_size(Image1, Width, Height)</l>
+<c></c>
+<l>zoom_image_size(Image2, ImageZoom, Width, Height, 'bilinear')</l>
+<c></c>
+<l>dev_clear_window()</l>
+<c></c>
+<c>* 图像加法运算</c>
+<l>add_image(Image1, ImageZoom, ResultAdd, 0.5, 0)</l>
+<l>dev_display(ResultAdd)</l>
+<c></c>
+<c>* 清屏</c>
+<l>dev_clear_window()</l>
+<c></c>
+<c>* 图像减法运算</c>
+<l>sub_image(Image1, ImageZoom, ImageSub, 1, 0)</l>
+<l>dev_display(ImageSub)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'D:/courses/图像处理/2024实验要求/图片/experiment2.JPG')</l>
+<c></c>
+<c>* rgb通道分离</c>
+<l>decompose3(Image, image_R, image_G, image_B)</l>
+<c>* 高斯滤波处理</c>
+<l>gauss_filter (image_R, ImageGauss, 5)</l>
+<c>* 增强图像对比度</c>
+<l>scale_image_max (ImageGauss, ImageScaleMax)</l>
+<c>* 照亮图像</c>
+<l>illuminate (ImageScaleMax, ImageI1, 20, 20, 0.55)</l>
+<c>* 直方图均衡化</c>
+<l>equ_histo_image (image_G, ImageEquHisto2)</l>
+<l>equ_histo_image (image_B, ImageEquHisto3)</l>
+<c>* 通道合并</c>
+<l>rgb3_to_gray(ImageI1, ImageEquHisto2, ImageEquHisto3, Image1)</l>
+<c></c>
+<l>threshold (ImageEquHisto3, Region, 5, 110)</l>
+<l>threshold (Image1, Region1, 80, 120)</l>
+<l>intersection (Region, Region1, RegionIntersection)</l>
+<c></c>
+<l>smallest_rectangle1 (RegionIntersection, Row1, Column1, Row2, Column2)</l>
+<c></c>
+<l>Width := Column2-Column1</l>
+<c></c>
+<l>dev_open_window (Row1, Column1, 512, 512, 'black', WindowHandle)</l>
+<l>dev_display (Image)</l>
+<l>Message := '周长：'+ Width</l>
+<l>dev_disp_text (Message, 'window', Row1, Column1, 'blue', [], [])</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

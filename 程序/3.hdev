@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>list_files ('D:/courses/图像处理/2024实验要求/图片/experiment3', 'files', Files)</l>
+<l>*index := 2</l>
+<c>*圆形度、面积、</c>
+<l>for index := 1 to |Files| by 1</l>
+<c>    * 读取图像</c>
+<l>    read_image (Image, Files[index-1])</l>
+<l>    gen_rectangle1 (Rectangle, 1, 64, 226, 230)</l>
+<l>    reduce_domain (Image, Rectangle, Image1)</l>
+<c>    </c>
+<l>    equ_histo_image (Image1, ImageEquHisto)</l>
+<c>    </c>
+<l>    threshold (ImageEquHisto, RegionGlobal, 0, 65)</l>
+<l>    fill_up (RegionGlobal, RegionFillUp)</l>
+<c></c>
+<c>    * 形态学处理：开运算去除粘连</c>
+<l>    opening_circle (RegionFillUp, RegionProcessed, 7.5)</l>
+<c>    </c>
+<c>    * 连通区域分割</c>
+<l>    connection (RegionProcessed, ConnectedRegions)</l>
+<c></c>
+<c>    * 特征筛选：面积、圆形度等</c>
+<l>    select_shape (ConnectedRegions, SelectedRegions, ['area', 'roundness'], 'and', [640, 0.88], [5000, 1])</l>
+<c>    * 使用紧凑度来筛选区域</c>
+<l>    select_shape (SelectedRegions, SelectedRegionsFinal, ['compactness'], 'and', [1.0], [1.3])</l>
+<l>    *select_obj (ConnectedRegions, HeadRegion, 1)</l>
+<l>    *select_obj (SelectedRegionsFinal, HeadRegion, 1)</l>
+<c></c>
+<c>    * 计算区域特征</c>
+<l>    *region_features (HeadRegion, 'area', Area)</l>
+<l>    *region_features (HeadRegion, 'roundness', Roundness)</l>
+<l>    *region_features (HeadRegion, 'compactness', Compactness)</l>
+<c>    </c>
+<c>    * 显示原图和选定区域</c>
+<l>    dev_clear_window ()</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_color ('red')</l>
+<l>    dev_display (SelectedRegionsFinal)</l>
+<l>    stop ()</l>
+<c>    </c>
+<l>endfor</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

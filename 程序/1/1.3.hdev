@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'D:/courses/图像处理/2024实验要求/图片/experiment1/4.jpg')</l>
+<l>dev_display (Image)</l>
+<c></c>
+<c>*变亮</c>
+<l>scale_image(Image, BrightImage, 1.5, 0)</l>
+<l>dev_display (BrightImage)</l>
+<c></c>
+<c>*变暗</c>
+<l>scale_image(Image, DarkImage, 0.5, 0)</l>
+<l>dev_display (DarkImage)</l>
+<c></c>
+<c>*负片</c>
+<l>invert_image (Image, ImageInvert)</l>
+<l>dev_display (ImageInvert)</l>
+<c></c>
+<c>* 对数变换</c>
+<l>log_image(ImageInvert, LogImage, 'e')</l>
+<l>dev_display(LogImage)</l>
+<c></c>
+<c>* 幂指数变换</c>
+<l>pow_image(Image, PowerImageResult, 2.0)</l>
+<l>dev_display(PowerImageResult)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'D:/courses/图像处理/2024实验要求/图片/experiment1/8.jpg')</l>
+<c></c>
+<c>* 计算傅里叶变换</c>
+<l>fft_image(Image, FourierImage)</l>
+<c></c>
+<c>* 旋转原图</c>
+<l>get_image_size(Image, Width, Height)</l>
+<l>hom_mat2d_identity(HomMat2D)</l>
+<l>hom_mat2d_rotate(HomMat2D, rad(45), Height/2, Width/2, HomMat2DRotate)</l>
+<l>affine_trans_image(Image, RotatedGray, HomMat2DRotate, 'constant', 'false')</l>
+<c></c>
+<c>* 计算旋转图像的傅里叶变换</c>
+<l>fft_image(RotatedGray, RotatedFourierImage)</l>
+<c></c>
+<c>* 显示频谱</c>
+<l>dev_clear_window()</l>
+<l>dev_display(FourierImage)</l>
+<l>dev_clear_window()</l>
+<l>dev_display(RotatedFourierImage)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

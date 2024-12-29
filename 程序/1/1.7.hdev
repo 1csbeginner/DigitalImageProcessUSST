@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'D:/courses/图像处理/2024实验要求/图片/experiment1/3.jpg')</l>
+<c>* 转换为灰度图</c>
+<l>decompose3(Image, ImageRed, ImageGreen, ImageBlue)</l>
+<l>rgb3_to_gray(ImageRed, ImageGreen, ImageBlue, ImageGray)</l>
+<c></c>
+<c>* 添加椒盐噪声</c>
+<l>sp_distribution (5, 5, Distribution)</l>
+<l>add_noise_distribution (ImageGray, ImageNoise, Distribution)</l>
+<c></c>
+<c>* 均值滤波去噪</c>
+<l>mean_image(ImageNoise, MeanFiltered, 5, 5)</l>
+<c></c>
+<c>* 平滑滤波去噪</c>
+<l>gauss_filter (ImageNoise, ImageGauss, 5)</l>
+<c></c>
+<c>* 显示结果</c>
+<l>dev_clear_window()</l>
+<l>dev_display(ImageNoise)</l>
+<l>dev_clear_window()</l>
+<l>dev_display(MeanFiltered)</l>
+<l>dev_clear_window()</l>
+<l>dev_display(ImageGauss)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

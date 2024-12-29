@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>* 读取图像</c>
+<l>read_image(Image, 'D:/courses/图像处理/2024实验要求/图片/experiment4.jpg')</l>
+<c></c>
+<c>* 图像预处理</c>
+<l>rgb1_to_gray(Image, GrayImage)</l>
+<l>scale_image_max(GrayImage, ImageScaled)</l>
+<c></c>
+<c>* 阈值分割</c>
+<l>threshold(ImageScaled, Region, 10, 140)</l>
+<l>closing_circle(Region, RegionSmoothed, 2.5)  </l>
+<l>opening_circle(RegionSmoothed, RegionCleaned, 2.5)  </l>
+<c></c>
+<l>connection(RegionCleaned, ConnectedRegions)</l>
+<l>gen_rectangle1(Rectangle, 1297, 1084, 1405, 1848)</l>
+<l>intersection(ConnectedRegions, Rectangle, RegionInROI)</l>
+<c></c>
+<c>* 去除噪声区域（按面积筛选）</c>
+<l>select_shape(RegionInROI, Characters, 'area', 'and', 1000, 2500)</l>
+<c></c>
+<c>* 对字符排序</c>
+<l>sort_region(Characters, SortedRegions, 'first_point', 'true', 'column')</l>
+<c></c>
+<c>* 加载字符识别模型</c>
+<l>read_ocr_class_mlp('D:/Program Files/MVTec/HALCON-18.05-Progress/ocr/Document_0-9_NoRej.omc', OCRHandle)</l>
+<c></c>
+<c>* 进行字符识别</c>
+<l>do_ocr_multi_class_mlp(SortedRegions, GrayImage, OCRHandle, RecognizedClasses, Confidence)</l>
+<c></c>
+<c>* 打开窗口显示图像</c>
+<l>dev_open_window (0, 0, 1024, 768, 'black', WindowHandle)</l>
+<l>dev_display (Image)</l>
+<c></c>
+<c>* 初始化消息字符串</c>
+<l>tuple_sum (RecognizedClasses, Message)</l>
+<c>* 设置字体大小</c>
+<l>set_display_font(WindowHandle, 30, 'mono', 'true', 'false')</l>
+<c></c>
+<c>* 显示结果</c>
+<l>dev_disp_text(Message, 'window', 0, 0, 'blue', [], [])</l>
+<c></c>
+<c></c>
+<c>* 清除OCR句柄</c>
+<l>clear_ocr_class_mlp(OCRHandle)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

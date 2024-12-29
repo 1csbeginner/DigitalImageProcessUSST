@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'D:/courses/图像处理/2024实验要求/图片/experiment1/9.jpg')</l>
+<c>* 转换为灰度图</c>
+<l>decompose3(Image, ImageRed, ImageGreen, ImageBlue)</l>
+<l>rgb3_to_gray(ImageRed, ImageGreen, ImageBlue, ImageGray)</l>
+<c></c>
+<c>* 使用 Sobel 算子检测边缘</c>
+<l>sobel_amp (ImageGray, SobelEdges, 'sum_abs', 5)</l>
+<c></c>
+<c>* 使用拉普拉斯算子检测边缘</c>
+<l>laplace(ImageGray, LaplaceEdges, 'signed', 7, 'n_4')</l>
+<c></c>
+<c>* 显示结果</c>
+<l>dev_clear_window()</l>
+<l>dev_display(SobelEdges)</l>
+<l>dev_clear_window()</l>
+<l>dev_display(LaplaceEdges)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
